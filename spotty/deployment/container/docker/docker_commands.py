@@ -41,6 +41,8 @@ class DockerCommands(AbstractContainerCommands):
         for volume_mount in self._instance_config.volume_mounts:
             args += ['-v', '%s:%s:%s' % (volume_mount.host_path, volume_mount.mount_path, volume_mount.mode)]
 
+        args += ['-v', '%s:%s:%s' % ('/efs', '/efs', 'ro')]
+
         for env_name, env_value in self._instance_config.container_config.env.items():
             args += ['-e', '%s=%s' % (env_name, env_value)]
 
